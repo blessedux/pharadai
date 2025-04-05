@@ -6,7 +6,7 @@ export default function Hero() {
   return (
     <div 
       id="home" 
-      className="w-full h-screen bg-slate-950 pt-16"
+      className="w-full min-h-screen bg-slate-950 pt-20 md:pt-24"
     >
       <LampDemo />
     </div>
