@@ -135,8 +135,11 @@ export default function ProjectSection() {
   return (
     <section 
       id="projects" 
-      className="w-full py-24 bg-slate-900"
-      style={{ contain: 'content' }}
+      className="w-full py-24"
+      style={{ 
+        background: 'linear-gradient(to bottom, #0f172a, #1e2d4a)',
+        contain: 'content' 
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -147,7 +150,7 @@ export default function ProjectSection() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-white mb-6"
           >
-            Nuestros Proyectos
+            Nuestra Experiencia
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}

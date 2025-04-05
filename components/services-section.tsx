@@ -12,9 +12,9 @@ export default function ServicesSection() {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Nuestra Experiencia</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Pharadai</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Nos especializamos en tecnologías de vanguardia para ofrecer soluciones excepcionales para su empresa
+          Transformamos ideas en soluciones inteligentes. Usamos IA y software a medida para optimizar tu negocio, hacerlo más eficiente y ayudarte a crecer.
           </p>
         </div>
 

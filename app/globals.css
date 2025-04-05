@@ -56,7 +56,7 @@ html {
 }
 
 /* Ensure all content is visible and loaded by default */
-section {
+section:not(.sticky-section) {
   opacity: 1 !important;
   transform: none !important;
   transition: none !important;
@@ -114,5 +114,26 @@ img, video {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #475569;
+}
+
+/* Scroll animation styles */
+.scroll-section {
+  position: relative;
+  min-height: 200vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+.sticky-section {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: opacity, filter, transform;
+  transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
 }
 

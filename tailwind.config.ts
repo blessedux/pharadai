@@ -80,11 +80,24 @@ const config: Config = {
           "0%": { opacity: "0" },
           "100%": { opacity: "1" },
         },
+        "logo-fade-in": {
+          "0%": { 
+            opacity: "0", 
+            filter: "blur(8px)",
+            transform: "scale(0.8) translateY(10px)" 
+          },
+          "100%": { 
+            opacity: "1", 
+            filter: "blur(0)",
+            transform: "scale(1) translateY(0)" 
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in": "fade-in 1s ease-in-out 1s forwards",
+        "logo-fade-in": "logo-fade-in 0.7s ease-out forwards",
       },
     },
   },

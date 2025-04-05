@@ -87,12 +87,12 @@ export default function Navbar() {
           duration: 0.3,
           ease: "easeInOut"
         }}
-        className="floating-navbar"
+        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-4 pointer-events-none"
       >
         <motion.nav
           className="flex items-center justify-between backdrop-blur-md bg-slate-900/85 border border-slate-700/60 
                    rounded-full px-4 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)]
-                   max-w-3xl w-[95%] mx-auto"
+                   max-w-3xl w-[95%] mx-auto pointer-events-auto"
           whileHover={{
             scale: 1.02,
             boxShadow: "0 10px 40px rgba(16,185,129,0.2)"
