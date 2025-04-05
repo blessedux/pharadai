@@ -13,6 +13,7 @@ import {
   MorphingDialogDescription,
   MorphingDialogContainer,
 } from "@/components/ui/morphing-dialog"
+import { cn } from "@/lib/utils"
 
 interface TeamMemberProps {
   name: string
@@ -47,9 +48,9 @@ export default function TeamMember({
         style={{
           borderRadius: "16px",
         }}
-        className="group hover:-translate-y-2 transition-transform duration-300 w-full bg-slate-800/80 backdrop-blur-sm border-slate-700 overflow-hidden h-full"
+        className="group hover:-translate-y-2 transition-transform duration-300 w-full bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 overflow-hidden h-full shadow-lg hover:shadow-cyan-500/10"
       >
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 z-10"></div>
         <MorphingDialogImage 
           src={image} 
           alt={name}
@@ -96,7 +97,7 @@ export default function TeamMember({
           style={{
             borderRadius: "24px",
           }}
-          className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-slate-700 bg-slate-800/90 backdrop-blur-md sm:w-[600px]"
+          className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden border border-slate-700/50 bg-slate-800/90 backdrop-blur-xl shadow-2xl sm:w-[600px]"
         >
           <MorphingDialogImage 
             src={image} 

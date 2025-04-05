@@ -15,19 +15,29 @@ export default function TeamSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { opacity: 0, y: 40, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      scale: 1,
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 15 
+      }
     }
   };
 
   return (
     <section 
-      className="w-full py-24 pb-32 bg-slate-900"
+      className="w-full py-24 pb-32 bg-gradient-to-b from-slate-900 to-slate-950"
       id="team"
-      style={{ contain: 'content' }}
+      style={{ 
+        contain: 'content',
+        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgb(15 23 42), rgb(2 6 23))",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       <div className="container mx-auto px-4">
         <motion.div 
@@ -35,22 +45,40 @@ export default function TeamSection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ 
+            duration: 0.6, 
+            type: "spring", 
+            stiffness: 50
+          }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Nuestro Equipo</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <motion.h2 
+            className="text-4xl md:text-5xl font-bold text-white mb-6"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1, duration: 0.6 }}
+          >
+            Nuestro Equipo
+          </motion.h2>
+          <motion.p 
+            className="text-xl text-gray-300 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+          >
             Un equipo multidisciplinario de expertos en tecnología, negocios y normativa urbana
-          </p>
+          </motion.p>
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex h-full">
             <TeamMember
               name="Álvaro Acevedo"
               role="CTO y Founder"
@@ -63,7 +91,7 @@ export default function TeamSection() {
               }}
             />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex h-full">
             <TeamMember
               name="Franco Enrique Parra Campos"
               role="Back Office Engineer"
@@ -76,7 +104,7 @@ export default function TeamSection() {
               }}
             />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex h-full">
             <TeamMember
               name="Simon Espínola Marín"
               role="Director Comercial y Co-Founder"
@@ -89,7 +117,7 @@ export default function TeamSection() {
               }}
             />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex h-full">
             <TeamMember
               name="Joaquín Farfán Torres"
               role="Desarrollador Front-end"
@@ -102,7 +130,7 @@ export default function TeamSection() {
               }}
             />
           </motion.div>
-          <motion.div variants={itemVariants}>
+          <motion.div variants={itemVariants} className="flex h-full">
             <TeamMember
               name="Francisca Salazar Herrera"
               role="Analista de Proyectos Urbanos"
