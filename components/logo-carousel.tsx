@@ -73,7 +73,7 @@ export default function PartnerLogoCarousel() {
         // When the section is entering viewport from bottom
         if (top > 0) {
           // Make fade-in happen more quickly (in less scroll distance)
-          const entryProgress = (1 - (top / windowHeight)) * 1.5;
+          const entryProgress = (1 - (top / windowHeight)) * 2;
           setScrollProgress(Math.min(entryProgress * 0.5, 0.5)); // Cap at 0.5 for entry phase
         } 
         // Second part of animation - fade out (0.5 to 1 progress)
@@ -211,19 +211,19 @@ export default function PartnerLogoCarousel() {
     return (
       <section 
         ref={sectionRef}
-        className="w-full py-8 md:py-10 bg-slate-950 sticky-section"
+        className="w-full py-8 pt-16 md:pt-20 bg-slate-950 sticky-section"
         style={{ 
           opacity: 0,
           position: "sticky",
           top: 0,
           height: "60vh",
           display: "flex",
-          alignItems: "center",
+          alignItems: "flex-start",
           justifyContent: "center"
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-center py-4">
+          <div className="flex justify-center pt-0 pb-4">
             {/* Empty placeholders */}
             <div className={cn(
               "grid gap-x-8 gap-y-8 md:gap-x-12 md:gap-y-12 place-items-center",
@@ -242,20 +242,20 @@ export default function PartnerLogoCarousel() {
   return (
     <section 
       ref={sectionRef}
-      className="w-full py-8 md:py-10 bg-slate-950 sticky-section"
+      className="w-full py-8 pt-16 md:pt-20 bg-slate-950 sticky-section"
       style={{
         ...sectionStyle,
         position: "sticky",
         top: 0,
         height: "60vh",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "center",
         willChange: "opacity, filter, transform"
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="w-full overflow-hidden flex justify-center py-4">
+        <div className="w-full overflow-hidden flex justify-center pt-0 pb-4">
           <div className={cn(
             "grid gap-x-8 gap-y-10 md:gap-x-16 md:gap-y-16 place-items-center",
             isMobile ? "grid-cols-3" : "grid-cols-6"

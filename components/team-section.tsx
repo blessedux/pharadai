@@ -30,11 +30,11 @@ export default function TeamSection() {
 
   return (
     <section 
-      className="w-full py-24 pb-32 bg-gradient-to-b from-slate-900 to-slate-950"
+      className="w-full py-24 pb-32"
       id="team"
       style={{ 
         contain: 'content',
-        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgb(15 23 42), rgb(2 6 23))",
+        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgb(51 65 85), rgb(15 23 42))",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

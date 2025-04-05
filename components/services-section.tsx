@@ -6,9 +6,16 @@ import ServiceCard from "@/components/service-card"
 export default function ServicesSection() {
   return (
     <section 
-      className="w-full py-24 pb-32 bg-slate-900"
+      className="w-full py-24 pb-32"
       id="services"
-      style={{ contain: 'content' }}
+      style={{ 
+        contain: 'content',
+        background: 'linear-gradient(to bottom, #0f172a, #1e293b)',
+        backgroundImage: 'linear-gradient(to bottom, rgb(15 23 42), rgb(30 41 59))',
+        marginTop: "-3px",
+        position: "relative",
+        zIndex: 10
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">

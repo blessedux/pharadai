@@ -2,7 +2,7 @@
 
 export default function Footer() {
   return (
-    <footer className="w-full py-12 bg-slate-900 relative overflow-hidden">
+    <footer className="w-full py-12 bg-slate-900 fixed bottom-0 left-0 z-0 overflow-hidden min-h-[16rem]">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">

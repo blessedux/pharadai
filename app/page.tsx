@@ -1,6 +1,5 @@
 "use client"
 
-import Navbar from "@/components/navbar"
 import ServicesSection from "@/components/services-section"
 import ProcessSection from "@/components/process-section"
 import TeamSection from "@/components/team-section"
@@ -12,23 +11,27 @@ import PartnerLogoCarousel from "@/components/logo-carousel"
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden">
+      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden relative z-10" style={{ marginBottom: "0" }}>
         <ScrollSections />
         
         {/* Logo carousel with proper spacing for scroll animation */}
-        <div className="w-full" style={{ minHeight: "60vh", position: "relative" }}>
+        <div className="w-full" style={{ 
+          minHeight: "60vh", 
+          position: "relative"
+        }}>
           <PartnerLogoCarousel />
         </div>
         
-        <div className="w-full" style={{ marginTop: "-20vh" }}>
+        <div className="w-full" style={{ marginTop: "-60vh" }}>
           <ServicesSection />
           <ProcessSection />
           <TeamSection />
           <ProjectSection />
-          <Footer />
         </div>
       </main>
+      
+      {/* Footer is now fixed at bottom with z-index of 0 */}
+      <Footer />
     </>
   )
 }

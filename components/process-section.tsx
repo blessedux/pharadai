@@ -3,9 +3,13 @@
 export default function ProcessSection() {
   return (
     <section 
-      className="w-full py-24 pb-32 bg-slate-800"
+      className="w-full py-24 pb-32"
       id="process"
-      style={{ contain: 'content' }}
+      style={{ 
+        contain: 'content',
+        background: 'linear-gradient(to bottom, #1e293b, #334155)',
+        backgroundImage: 'linear-gradient(to bottom, rgb(30 41 59), rgb(51 65 85))'
+      }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
@@ -26,7 +30,7 @@ export default function ProcessSection() {
               key={step.number}
               className="relative"
             >
-              <div className="bg-slate-700 rounded-lg p-8 h-full">
+              <div className="bg-slate-700/90 rounded-lg p-8 h-full">
                 <div className="text-5xl font-bold text-cyan-400 mb-4">{step.number}</div>
                 <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
                 <p className="text-gray-300">{step.description}</p>

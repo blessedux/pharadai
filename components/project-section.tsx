@@ -135,9 +135,10 @@ export default function ProjectSection() {
   return (
     <section 
       id="projects" 
-      className="w-full py-24"
+      className="w-full py-24 pb-64"
       style={{ 
-        background: 'linear-gradient(to bottom, #0f172a, #1e2d4a)',
+        background: 'linear-gradient(to bottom, #0f172a, #020617)',
+        backgroundImage: 'linear-gradient(to bottom, rgb(15 23 42), rgb(2 6 23))',
         contain: 'content' 
       }}
     >

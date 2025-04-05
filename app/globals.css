@@ -40,7 +40,7 @@ body {
   overflow-x: hidden;
   content-visibility: auto;
   contain-intrinsic-size: 1px 5000px; /* Approximate size hint for page */
-  scroll-padding-top: 80px; /* Add padding for the fixed navbar at top */
+  scroll-padding-bottom: 80px; /* Add padding for the fixed navbar at bottom */
 }
 
 html {
@@ -63,6 +63,9 @@ section:not(.sticky-section) {
   content-visibility: auto;
   contain-intrinsic-size: 1px 800px; /* Approximate height hint for sections */
   will-change: auto;
+  position: relative; /* Ensure sections stay above the footer */
+  z-index: 10; /* Higher z-index than the footer */
+  background-color: var(--background); /* Ensure no transparent sections */
 }
 
 /* Force all images and videos to be visible */
@@ -84,7 +87,7 @@ img, video {
 .floating-navbar {
   position: fixed !important;
   z-index: var(--z-navbar) !important;
-  top: 1.5rem !important;
+  bottom: 1.5rem !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;

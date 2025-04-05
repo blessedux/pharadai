@@ -8,6 +8,7 @@ import Hero from './hero';
 export default function ScrollSections() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
   
   // Calculate scroll progress relative to this section
   useEffect(() => {
@@ -25,7 +26,8 @@ export default function ScrollSections() {
       // When the section is at the top of the viewport
       if (top <= 0) {
         // Calculate how far we've scrolled through the section
-        progress = Math.min(Math.abs(top) / (height - windowHeight), 1);
+        // Account for navbar at bottom by using a slightly larger denominator
+        progress = Math.min(Math.abs(top) / (height - windowHeight + 80), 1);
       }
       
       setScrollProgress(progress);
@@ -39,23 +41,29 @@ export default function ScrollSections() {
     };
   }, []);
   
-  // Calculate styles based on scroll progress
-  const heroStyle = {
-    opacity: 1 - scrollProgress * 1.5, // Fade out faster
-    filter: `blur(${scrollProgress * 10}px)`,
-    transform: `scale(${1 - scrollProgress * 0.05})`,
-  };
+  // Apply scroll effects to hero text
+  useEffect(() => {
+    const heroTextElement = document.querySelector('.hero-text') as HTMLElement;
+    if (heroTextElement) {
+      heroTextElement.style.opacity = `${1 - scrollProgress * 1.5}`;
+      heroTextElement.style.filter = `blur(${scrollProgress * 5}px)`;
+      heroTextElement.style.transform = `scale(${1 - scrollProgress * 0.05})`;
+      heroTextElement.style.transition = 'opacity 0.2s, filter 0.2s, transform 0.2s';
+    }
+  }, [scrollProgress]);
   
   return (
     <div 
       ref={sectionRef} 
       className="scroll-section"
-      style={{ minHeight: "95vh" }} // Further reduced height to bring logos closer
+      style={{ 
+        minHeight: "70vh" // Further reduced height
+      }}
     >
-      {/* Hero Section with blur effect */}
+      {/* Hero Section - only text will be affected by scroll */}
       <div 
         className="sticky-section z-10"
-        style={heroStyle}
+        ref={heroRef}
       >
         <Hero />
       </div>

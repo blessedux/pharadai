@@ -59,12 +59,9 @@ export default function Navbar() {
     }
   }, [])
   
-  // Show/hide navbar based on scroll direction
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      // Always keep the navbar visible for better navigation
-      setIsVisible(true)
-    }
+  // Always keep navbar visible
+  useMotionValueEvent(scrollYProgress, "change", () => {
+    setIsVisible(true)
   })
   
   // Smooth scroll to section when nav item is clicked
@@ -78,31 +75,31 @@ export default function Navbar() {
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        initial={{ opacity: 0, y: -100 }}
+        initial={{ opacity: 0, y: 100 }}
         animate={{ 
           opacity: isVisible ? 1 : 0,
-          y: isVisible ? 0 : -100
+          y: isVisible ? 0 : 100
         }}
         transition={{
           duration: 0.3,
           ease: "easeInOut"
         }}
-        className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center py-4 pointer-events-none"
+        className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-center py-4 pointer-events-none floating-navbar"
       >
         <motion.nav
           className="flex items-center justify-between backdrop-blur-md bg-slate-900/85 border border-slate-700/60 
-                   rounded-full px-4 py-1.5 shadow-[0_8px_32px_rgba(0,0,0,0.25)]
+                   rounded-full px-4 py-1.5 shadow-[0_-8px_32px_rgba(0,0,0,0.25)] mb-6 
                    max-w-3xl w-[95%] mx-auto pointer-events-auto"
           whileHover={{
             scale: 1.02,
-            boxShadow: "0 10px 40px rgba(16,185,129,0.2)"
+            boxShadow: "0 -10px 40px rgba(16,185,129,0.2)"
           }}
           animate={{ 
             opacity: 1, 
             scale: 1,
             boxShadow: isScrolled 
-              ? "0 8px 32px rgba(0,0,0,0.3), 0 0 10px rgba(16,185,129,0.15)" 
-              : "0 8px 32px rgba(0,0,0,0.25)"
+              ? "0 -8px 32px rgba(0,0,0,0.3), 0 0 10px rgba(16,185,129,0.15)" 
+              : "0 -8px 32px rgba(0,0,0,0.25)"
           }}
           layout
           initial={{ opacity: 0, scale: 0.9 }}
