@@ -8,6 +8,7 @@ interface TeamMemberProps {
   name: string
   role: string
   image: string
+  bio?: string
   delay?: number
   socialLinks?: {
     twitter?: string
@@ -20,6 +21,7 @@ export default function TeamMember({
   name, 
   role, 
   image, 
+  bio,
   delay = 0,
   socialLinks 
 }: TeamMemberProps) {
@@ -38,12 +40,18 @@ export default function TeamMember({
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
           />
         </div>
-        <CardContent className="pt-6 pb-6">
+        <CardContent className="pt-6 pb-6 flex flex-col h-[calc(100%-16rem)]">
           <h3 className="text-xl font-bold text-white mb-1">{name}</h3>
-          <p className="text-cyan-400 mb-4">{role}</p>
+          <p className="text-cyan-400 mb-3">{role}</p>
+          
+          {bio && (
+            <p className="text-gray-300 text-sm mb-4 flex-grow line-clamp-4 hover:line-clamp-none transition-all">
+              {bio}
+            </p>
+          )}
           
           {socialLinks && (
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 mt-auto">
               {socialLinks.twitter && (
                 <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
                   <Twitter className="h-5 w-5" />

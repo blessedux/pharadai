@@ -78,10 +78,10 @@ export default function Navbar() {
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        initial={{ opacity: 0, y: 100 }}
+        initial={{ opacity: 0, y: -100 }}
         animate={{ 
           opacity: isVisible ? 1 : 0,
-          y: isVisible ? 0 : 100
+          y: isVisible ? 0 : -100
         }}
         transition={{
           duration: 0.3,
@@ -101,7 +101,7 @@ export default function Navbar() {
             opacity: 1, 
             scale: 1,
             boxShadow: isScrolled 
-              ? "0 8px 32px rgba(0,0,0,0.3), 0 0 10px rgba(16,185,129,0.1)" 
+              ? "0 8px 32px rgba(0,0,0,0.3), 0 0 10px rgba(16,185,129,0.15)" 
               : "0 8px 32px rgba(0,0,0,0.25)"
           }}
           layout

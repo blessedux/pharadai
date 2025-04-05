@@ -8,9 +8,11 @@ interface ProjectCardProps {
   image: string
   tags: string[]
   delay: number
+  siteUrl?: string
+  codeUrl?: string
 }
 
-const ProjectCard = ({ title, description, image, tags, delay }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl }: ProjectCardProps) => {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 50 }}
@@ -43,6 +45,30 @@ const ProjectCard = ({ title, description, image, tags, delay }: ProjectCardProp
             </span>
           ))}
         </div>
+
+        <div className="mt-6 flex flex-col space-y-3">
+          {siteUrl && (
+            <a 
+              href={siteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+            >
+              Visit site <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </a>
+          )}
+          
+          {codeUrl && (
+            <a 
+              href={codeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center w-full border border-indigo-500 text-indigo-500 hover:bg-indigo-800/10 font-medium py-2 px-4 rounded-md transition-colors"
+            >
+              View code <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   )
@@ -51,32 +77,58 @@ const ProjectCard = ({ title, description, image, tags, delay }: ProjectCardProp
 export default function ProjectSection() {
   const projects = [
     {
-      title: "NeuralMind",
-      description: "Sistema de procesamiento de lenguaje natural para automatizar atención al cliente en tiempo real.",
-      image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-      tags: ["NLP", "Machine Learning", "ChatOps"],
-      delay: 0
+      title: "Genzee",
+      description: "Portal inmobiliario diseñado para las preferencias de alquiler de la Generación Z, con una interfaz minimalista.",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["Python", "Django", "Bootstrap", "Postgres", "Render"],
+      delay: 0,
+      siteUrl: "#",
+      codeUrl: "#"
     },
     {
-      title: "AutoVision",
-      description: "Plataforma de visión por computadora para automatizar inspecciones de control de calidad en líneas de producción.",
-      image: "https://images.unsplash.com/photo-1581472723648-909f4851d4ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Computer Vision", "Edge AI", "IoT"],
-      delay: 1
+      title: "AI Retirement Evaluator",
+      description: "Aplicación diseñada para calcular tu pensión proyectada bajo el sistema antiguo y el nuevo sistema de pensiones de Chile.",
+      image: "https://images.unsplash.com/photo-1621981288331-fc613be0e800?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["Python", "Fastapi", "React", "Tailwind", "TypeScript", "Vite"],
+      delay: 1,
+      siteUrl: "#",
+      codeUrl: "#"
     },
     {
-      title: "PredictSales",
-      description: "Solución de análisis predictivo que optimiza estrategias de ventas y forecast con precisión del 95%.",
-      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Predictive Analytics", "ML", "Business Intelligence"],
-      delay: 2
+      title: "XenYield",
+      description: "Un juego competitivo de exploración espacial impulsado por DeFi donde los jugadores apuestan activos para explorar exoplanetas tokenizados, extraer recursos y competir por rendimientos. Desarrollado para Sozu Hack #2.",
+      image: "https://images.unsplash.com/photo-1614728263952-84ea256f9679?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["Blockchain", "DeFi", "Gaming", "Smart Contracts", "Web3"],
+      delay: 2,
+      siteUrl: "https://xenyield.vercel.app",
+      codeUrl: "https://github.com/xenyield"
     },
     {
-      title: "SynthVoice",
-      description: "Tecnología avanzada de síntesis de voz para interfaces conversacionales en múltiples idiomas y dialectos.",
-      image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      tags: ["Speech Synthesis", "Voice AI", "NLP"],
-      delay: 3
+      title: "Dobi Agent",
+      description: "Un agente autónomo on-chain que valida, monitorea y gestiona dispositivos de infraestructura física en tiempo real, asegurando generación de ingresos y financiamiento a través de flujos de caja tokenizados.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["Blockchain", "IoT", "Smart Contracts", "NextJS", "Web3"],
+      delay: 3,
+      siteUrl: "https://dobi-agent-landing.vercel.app",
+      codeUrl: "https://github.com/DOBI_AGENT_LANDING"
+    },
+    {
+      title: "DOM App",
+      description: "Sistema que automatiza y optimiza la gestión de permisos municipales, reduciendo tiempo y errores para arquitectos mediante el uso de inteligencia artificial. Proyecto desarrollado para la Dirección de Obras Municipales.",
+      image: "https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["AI", "Municipal Work", "Permit Management", "React", "SVG"],
+      delay: 4,
+      siteUrl: "https://domlapp-landing.vercel.app",
+      codeUrl: "https://github.com/DOMLapp_landing"
+    },
+    {
+      title: "SweetCake",
+      description: "Sitio de comercio electrónico para pasteles y cupcakes, desarrollado con una interfaz atractiva y experiencia de usuario optimizada. Cada preparación es una obra de arte.",
+      image: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      tags: ["Python", "Django", "Bootstrap", "Postgres", "Render"],
+      delay: 5,
+      siteUrl: "#",
+      codeUrl: "#"
     }
   ]
 
@@ -108,7 +160,7 @@ export default function ProjectSection() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
           ))}
