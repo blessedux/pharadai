@@ -1,11 +1,54 @@
 "use client"
 
+import { useState, useEffect } from 'react'
+
 export default function Footer() {
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    // Function to handle scroll and determine footer visibility
+    const handleScroll = () => {
+      // Calculate how far down the page the user has scrolled
+      const scrollPosition = window.scrollY
+      const windowHeight = window.innerHeight
+      const documentHeight = document.documentElement.scrollHeight
+
+      // Start showing the footer when user is close to the end of the page
+      // Adjust the threshold based on your needs
+      const threshold = documentHeight - windowHeight - 300
+      
+      if (scrollPosition > threshold) {
+        setIsVisible(true)
+      } else {
+        setIsVisible(false)
+      }
+    }
+
+    // Add scroll event listener
+    window.addEventListener('scroll', handleScroll)
+    
+    // Initial check
+    handleScroll()
+    
+    // Clean up the event listener
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
   return (
-    <footer className="w-full py-12 bg-slate-900 fixed bottom-0 left-0 z-0 overflow-hidden min-h-[16rem]">
+    <footer 
+      id="contact" 
+      className={`w-full py-12 bg-slate-900 fixed bottom-0 left-0 z-[5] overflow-hidden min-h-[16rem] transition-transform duration-500 ease-out ${!isVisible ? 'translate-y-[90%]' : 'translate-y-0'}`}
+      style={{ 
+        transform: isVisible ? 'translateY(0)' : 'translateY(90%)',
+        willChange: 'transform',
+      }}
+    >
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
+            <h2 className="text-2xl font-bold text-white mb-2">PHARAD.AI</h2>
             <p className="text-gray-400 mt-2">Empresa líder en soluciones de IA en Chile y Estados Unidos</p>
           </div>
           <div className="flex flex-col md:flex-row gap-8">
@@ -40,10 +83,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Half-visible title at the bottom */}
-      <div className="absolute bottom-0 left-0 right-0 flex justify-center transform translate-y-1/2 overflow-hidden">
+      {/* Large background title */}
+      <div className="absolute -bottom-10 left-0 right-0 flex justify-center transform translate-y-0 overflow-hidden">
         <h2 
-          className="text-8xl md:text-9xl font-bold text-gray-500/30 tracking-[0.5em] font-favorite whitespace-nowrap"
+          className="text-[12rem] md:text-[16rem] font-extrabold text-gray-500/25 tracking-[0.3em] font-favorite whitespace-nowrap"
           style={{ fontFamily: "var(--font-favorite)" }}
         >
           PHARAD.AI

@@ -7,11 +7,12 @@ import ProjectSection from "@/components/project-section"
 import Footer from "@/components/footer"
 import ScrollSections from "@/components/scroll-sections"
 import PartnerLogoCarousel from "@/components/logo-carousel"
+import GeminiEffectWrapper from "@/components/gemini-effect-wrapper"
 
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden relative z-10" style={{ marginBottom: "0" }}>
+      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden relative z-10" style={{ marginBottom: "calc(16rem - 100px)" }}>
         <ScrollSections />
         
         {/* Logo carousel with proper spacing for scroll animation */}
@@ -27,6 +28,10 @@ export default function Home() {
           <ProcessSection />
           <TeamSection />
           <ProjectSection />
+          <GeminiEffectWrapper />
+          
+          {/* Spacer to ensure footer is revealed gradually as you scroll */}
+          <div className="h-[300px] bg-transparent"></div>
         </div>
       </main>
       

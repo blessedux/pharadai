@@ -33,6 +33,7 @@
 
   /* Z-index layers */
   --z-navbar: 9999;
+  --footer-height: 16rem;
 }
 
 body {
@@ -40,7 +41,7 @@ body {
   overflow-x: hidden;
   content-visibility: auto;
   contain-intrinsic-size: 1px 5000px; /* Approximate size hint for page */
-  scroll-padding-bottom: 80px; /* Add padding for the fixed navbar at bottom */
+  scroll-padding-bottom: var(--footer-height); /* Add padding for the fixed footer */
 }
 
 html {
@@ -65,13 +66,34 @@ section:not(.sticky-section) {
   will-change: auto;
   position: relative; /* Ensure sections stay above the footer */
   z-index: 10; /* Higher z-index than the footer */
-  background-color: var(--background); /* Ensure no transparent sections */
+  background-color: transparent; /* Allow gradient backgrounds to work */
+}
+
+/* Make sure the last section has appropriate spacing for footer reveal */
+section#projects {
+  margin-bottom: 0; /* Remove explicit margin for more natural scroll */
+}
+
+/* Add proper spacing at the end of the page for footer reveal */
+#gemini {
+  padding-bottom: 100px; /* Space between gemini effect and footer reveal start */
 }
 
 /* Force all images and videos to be visible */
 img, video {
   content-visibility: auto;
   display: block;
+}
+
+/* Footer reveal effect */
+footer {
+  transition: transform 0.3s ease-out;
+  will-change: transform;
+}
+
+/* Footer is initially hidden below the viewport */
+.footer-hidden {
+  transform: translateY(100%);
 }
 
 /* Glassmorphism effect */
