@@ -11,17 +11,17 @@ export default function TeamSection() {
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Team</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Nuestro Equipo</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            Meet the experts behind our innovative AI solutions
+            Conozca a los expertos detrás de nuestras innovadoras soluciones de IA
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <TeamMember
             name="Alex Johnson"
-            role="CEO & AI Architect"
-            image="/images/team/team-1.jpg"
+            role="CEO y Arquitecto de IA"
+            image="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
             delay={0}
             socialLinks={{
               twitter: "https://twitter.com",
@@ -32,7 +32,7 @@ export default function TeamSection() {
           <TeamMember
             name="Sarah Chen"
             role="CTO"
-            image="/images/team/team-2.jpg"
+            image="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
             delay={0}
             socialLinks={{
               linkedin: "https://linkedin.com",
@@ -41,8 +41,8 @@ export default function TeamSection() {
           />
           <TeamMember
             name="Michael Rodriguez"
-            role="Lead Developer"
-            image="/images/team/team-3.jpg"
+            role="Desarrollador Principal"
+            image="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
             delay={0}
             socialLinks={{
               twitter: "https://twitter.com",
@@ -51,8 +51,8 @@ export default function TeamSection() {
           />
           <TeamMember
             name="Emily Taylor"
-            role="AI Research Scientist"
-            image="/images/team/team-4.jpg"
+            role="Científica de Investigación en IA"
+            image="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=256&h=256&q=80"
             delay={0}
             socialLinks={{
               linkedin: "https://linkedin.com",

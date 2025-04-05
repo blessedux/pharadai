@@ -6,36 +6,37 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <p className="text-gray-400 mt-2">The future of AI solutions</p>
+            <p className="text-gray-400 mt-2">Empresa líder en soluciones de IA en Chile y Estados Unidos</p>
           </div>
           <div className="flex flex-col md:flex-row gap-8">
             <div>
-              <h3 className="text-white font-bold mb-3">Services</h3>
+              <h3 className="text-white font-bold mb-3">Servicios</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>AI Agents</li>
-                <li>Automation</li>
-                <li>Custom Solutions</li>
+                <li>Agentes de IA</li>
+                <li>Automatización</li>
+                <li>Soluciones Personalizadas</li>
               </ul>
             </div>
             <div>
-              <h3 className="text-white font-bold mb-3">Company</h3>
+              <h3 className="text-white font-bold mb-3">Empresa</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>About</li>
-                <li>Careers</li>
-                <li>Contact</li>
+                <li>Sobre Nosotros</li>
+                <li>Carreras</li>
+                <li>Contacto</li>
               </ul>
             </div>
             <div>
               <h3 className="text-white font-bold mb-3">Legal</h3>
               <ul className="space-y-2 text-gray-400">
-                <li>Privacy Policy</li>
-                <li>Terms of Service</li>
+                <li>Política de Privacidad</li>
+                <li>Términos de Servicio</li>
               </ul>
             </div>
           </div>
         </div>
         <div className="border-t border-slate-800 mt-12 pt-8 text-center text-gray-500">
-          <p>© {new Date().getFullYear()} Pharad.AI. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Pharad.AI. Todos los derechos reservados.</p>
+          <p className="mt-2 text-sm">Liderando innovación en IA desde Santiago, Chile y San Francisco, Estados Unidos.</p>
         </div>
       </div>
 

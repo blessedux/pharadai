@@ -1,5 +1,4 @@
 import { Montserrat } from 'next/font/google'
-import localFont from 'next/font/local'
 
 export const montserrat = Montserrat({
   subsets: ['latin'],
@@ -7,6 +6,8 @@ export const montserrat = Montserrat({
   variable: '--font-montserrat',
 })
 
+// Temporarily comment out local font to fix build issues
+/*
 export const favorite = localFont({
   src: [
     {
@@ -23,4 +24,10 @@ export const favorite = localFont({
   display: 'swap',
   variable: '--font-favorite',
   fallback: ['Arial', 'sans-serif'],
-}) 
+})
+*/
+
+// Temporary replacement
+export const favorite = {
+  variable: '--font-sans'
+} 
