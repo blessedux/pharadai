@@ -25,30 +25,51 @@ export function LampDemo({
     }
   }, [onDarkModeChange]);
 
+  const textVariants = {
+    hidden: { opacity: 0.1, y: 10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.1 + (lightOn ? 0.2 : 0),
+        duration: 0.8,
+        ease: "easeInOut"
+      }
+    })
+  };
+
   return (
     <LampContainer lightOn={lightOn}>
       <div className="text-center">
-        <h1
+        <motion.h1
+          custom={0}
+          initial="hidden"
+          animate={lightOn ? "visible" : "hidden"}
+          variants={textVariants}
           className={cn(
             "mt-8 py-4 text-center text-5xl md:text-7xl font-bold tracking-tight",
             lightOn 
-              ? "text-white transition-all duration-1000"
-              : "text-slate-600 transition-all duration-300"
+              ? "text-white transition-colors duration-500"
+              : "text-slate-600 transition-colors duration-300"
           )}
         >
           El Futuro de <span className="text-cyan-400">Soluciones IA</span>
-        </h1>
+        </motion.h1>
         
-        <p
+        <motion.p
+          custom={1}
+          initial="hidden"
+          animate={lightOn ? "visible" : "hidden"}
+          variants={textVariants}
           className={cn(
             "text-xl md:text-2xl max-w-3xl mx-auto mt-4",
             lightOn
-              ? "text-gray-200 transition-all duration-1000"
-              : "text-slate-600 transition-all duration-300"
+              ? "text-gray-200 transition-colors duration-500"
+              : "text-slate-600 transition-colors duration-300"
           )}
         >
           Transformando empresas a través de automatización,<br></br> agentes de IA y soluciones personalizadas
-        </p>
+        </motion.p>
       </div>
     </LampContainer>
   );
