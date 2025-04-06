@@ -7,16 +7,16 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { throttle } from 'lodash';
 
 const allLogos = [
-  { id: 1, src: "/logos/logo1.svg", alt: "React" },
-  { id: 2, src: "/logos/logo2.svg", alt: "Python" },
-  { id: 3, src: "/logos/logo3.svg", alt: "Django" },
-  { id: 4, src: "/logos/logo4.svg", alt: "Tailwind CSS" },
-  { id: 5, src: "/logos/logo5.svg", alt: "Next.js" },
-  { id: 6, src: "/logos/logo6.svg", alt: "TypeScript" },
+  { id: 1, src: "/logos/react.svg", alt: "React" },
+  { id: 2, src: "/logos/python.svg", alt: "Python" },
+  { id: 3, src: "/logos/dj.svg", alt: "Django" },
+  { id: 4, src: "/logos/tailwind.svg", alt: "Tailwind CSS" },
+  { id: 5, src: "/logos/nextjs.svg", alt: "Next.js" },
+  { id: 6, src: "/logos/typescript.svg", alt: "TypeScript" },
   { id: 7, src: "/logos/threejs.svg", alt: "Three.js" },
   { id: 8, src: "/logos/vercel.svg", alt: "Vercel" },
   { id: 9, src: "/logos/github.svg", alt: "GitHub" },
-  { id: 10, src: "/logos/shadcn.svg", alt: "shadcn/ui" },
+  { id: 10, src: "/logos/shadcnui.svg", alt: "shadcn/ui" },
   { id: 11, src: "/logos/openai.svg", alt: "OpenAI" },
   { id: 12, src: "/logos/eliza.svg", alt: "ELIZA" },
 ];
