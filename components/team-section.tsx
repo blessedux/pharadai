@@ -75,8 +75,8 @@ export default function TeamSection() {
               delay={0}
               bio="Ingeniero en Administración de Empresas con diplomados en Marketing Digital, Comercio Internacional y Gestión Financiera. Ha liderado proyectos de transformación digital como Product Owner en Unired y Cencosud, desarrollando plataformas orientadas al usuario, sistemas de pago y marketplaces."
               socialLinks={{
-                linkedin: "https://linkedin.com",
-                github: "https://github.com"
+                linkedin: "https://www.linkedin.com/in/alvaro-acevedo-ing/",
+                github: "https://github.com/Bzzmn"
               }}
             />
           </div>
@@ -90,7 +90,7 @@ export default function TeamSection() {
               bio="Ingeniero Civil Informático por la Universidad Técnica Federico Santa María. Ha liderado la automatización de procesos críticos y la implementación de soluciones inteligentes basadas en datos, incluyendo proyectos para el Ministerio de Vivienda y Urbanismo."
               socialLinks={{
                 twitter: "https://twitter.com",
-                github: "https://github.com"
+                github: "https://github.com/franco-parra/"
               }}
             />
           </div>

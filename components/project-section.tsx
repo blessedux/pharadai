@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { cn } from "@/lib/utils"
 
 interface ProjectCardProps {
   title: string
@@ -12,9 +13,10 @@ interface ProjectCardProps {
   delay: number
   siteUrl?: string
   codeUrl?: string
+  index: number
 }
 
-const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl }: ProjectCardProps) => {
+const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl, index }: ProjectCardProps) => {
   return (
     <div 
       className="project-card group bg-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2"
@@ -46,7 +48,7 @@ const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl 
               href={siteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-md transition-colors"
+              className="inline-flex items-center justify-center w-full bg-cyan-500 hover:bg-cyan-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
             >
               Visit site <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </a>
@@ -57,7 +59,7 @@ const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl 
               href={codeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center w-full border border-indigo-500 text-indigo-500 hover:bg-indigo-800/10 font-medium py-2 px-4 rounded-md transition-colors"
+              className="inline-flex items-center justify-center w-full border border-cyan-500 text-cyan-400 hover:bg-cyan-900/20 font-medium py-2 px-4 rounded-md transition-colors"
             >
               View code <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" /></svg>
             </a>
@@ -120,7 +122,7 @@ export default function ProjectSection() {
     {
       title: "AI Retirement Evaluator",
       description: "Aplicación diseñada para calcular tu pensión proyectada bajo el sistema antiguo y el nuevo sistema de pensiones de Chile.",
-      image: "https://images.unsplash.com/photo-1621981288331-fc613be0e800?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
+      image: "/images/pension.webp",
       tags: ["Python", "Fastapi", "React", "Tailwind", "TypeScript", "Vite"],
       delay: 1,
       siteUrl: "#",
@@ -186,7 +188,11 @@ export default function ProjectSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={projectsRef}>
           {projects.map((project, index) => (
-            <ProjectCard key={index} {...project} />
+            <ProjectCard 
+              key={index} 
+              {...project} 
+              index={index}
+            />
           ))}
         </div>
       </div>
