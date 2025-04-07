@@ -34,6 +34,10 @@
   /* Z-index layers */
   --z-navbar: 9999;
   --footer-height: 16rem;
+  
+  /* Lamp component variables */
+  --conic-position: from_70deg_at_center_top;
+  --tw-gradient-stops: #06b6d4 0%, transparent 50%, transparent 100%;
 }
 
 body {
@@ -160,5 +164,10 @@ footer {
   justify-content: center;
   will-change: opacity, filter, transform;
   transition: opacity 0.2s ease, filter 0.2s ease, transform 0.2s ease;
+}
+
+/* Lamp component styles */
+.bg-gradient-conic {
+  background-image: conic-gradient(var(--conic-position), var(--tw-gradient-stops));
 }
 

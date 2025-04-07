@@ -102,15 +102,9 @@ export default function PartnerLogoCarousel() {
   
   // Calculate styles based on scroll progress
   const sectionStyle = {
-    opacity: scrollProgress <= 0.5 
-      ? scrollProgress * 2 // Fade in (0 to 1) during first half of progress (0 to 0.5)
-      : 1 - ((scrollProgress - 0.5) * 2), // Fade out (1 to 0) during second half (0.5 to 1)
-    filter: scrollProgress <= 0.5 
-      ? `blur(${10 - scrollProgress * 20}px)` // Reduce blur as we scroll in
-      : `blur(${(scrollProgress - 0.5) * 20}px)`, // Increase blur as we scroll out
-    transform: scrollProgress <= 0.5 
-      ? `scale(${0.9 + scrollProgress * 0.2})` // Scale up as we scroll in
-      : `scale(${1.1 - scrollProgress * 0.2})`, // Scale down as we scroll out
+    opacity: 1, // Force full opacity
+    filter: "blur(0px)", // Remove blur
+    transform: "scale(1)", // Normal scale
   };
   
   // Cleanup function for all timeouts
@@ -211,19 +205,21 @@ export default function PartnerLogoCarousel() {
     return (
       <section 
         ref={sectionRef}
-        className="w-full py-8 pt-16 md:pt-20 bg-slate-950 sticky-section"
+        className="w-full sticky-section"
         style={{ 
-          opacity: 0,
-          position: "sticky",
-          top: 0,
-          height: "60vh",
+          opacity: 1,
+          position: "relative",
+          height: "30vh",
           display: "flex",
-          alignItems: "flex-start",
-          justifyContent: "center"
+          alignItems: "center",
+          justifyContent: "center",
+          padding: 0,
+          marginBottom: 0,
+          backgroundColor: "#020617"
         }}
       >
         <div className="container mx-auto px-4">
-          <div className="flex justify-center pt-0 pb-4">
+          <div className="flex justify-center pt-0 pb-0">
             {/* Empty placeholders */}
             <div className={cn(
               "grid gap-x-8 gap-y-8 md:gap-x-12 md:gap-y-12 place-items-center",
@@ -242,22 +238,24 @@ export default function PartnerLogoCarousel() {
   return (
     <section 
       ref={sectionRef}
-      className="w-full py-8 pt-16 md:pt-20 bg-slate-950 sticky-section"
+      className="w-full"
       style={{
         ...sectionStyle,
-        position: "sticky",
-        top: 0,
-        height: "60vh",
+        position: "relative",
+        height: "30vh",
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         justifyContent: "center",
-        willChange: "opacity, filter, transform"
+        willChange: "opacity, filter, transform",
+        paddingBottom: 0,
+        marginBottom: 0,
+        backgroundColor: "#020617"
       }}
     >
-      <div className="container mx-auto px-4">
-        <div className="w-full overflow-hidden flex justify-center pt-0 pb-4">
+      <div className="container mx-auto px-4 h-full flex items-center">
+        <div className="w-full overflow-hidden flex justify-center items-center">
           <div className={cn(
-            "grid gap-x-8 gap-y-10 md:gap-x-16 md:gap-y-16 place-items-center",
+            "grid gap-x-8 gap-y-10 md:gap-x-16 md:gap-y-16 place-items-center w-full",
             isMobile ? "grid-cols-3" : "grid-cols-6"
           )}>
             {logoSlots.map((slot) => (
@@ -281,8 +279,8 @@ export default function PartnerLogoCarousel() {
                       "transition-all duration-500 ease-out"
                     )}
                   >
-                    <Image 
-                      src={slot.logo.src} 
+                    <Image
+                      src={slot.logo.src}
                       alt={slot.logo.alt}
                       width={60} 
                       height={60}

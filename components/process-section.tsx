@@ -1,5 +1,9 @@
 "use client"
 
+import { PinContainer } from "@/components/ui/3d-pin"
+import { Search, Lightbulb, Code, Rocket } from "lucide-react"
+import Link from "next/link"
+
 export default function ProcessSection() {
   return (
     <section 
@@ -19,24 +23,74 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {[
-            { number: "01", title: "Descubrimiento", description: "Analizamos las necesidades y desafíos de su negocio" },
-            { number: "02", title: "Estrategia", description: "Desarrollamos una estrategia de solución personalizada" },
-            { number: "03", title: "Desarrollo", description: "Nuestros expertos construyen su solución personalizada" },
-            { number: "04", title: "Implementación", description: "Implementamos y optimizamos su solución" },
-          ].map((step) => (
-            <div
-              key={step.number}
-              className="relative"
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <Link href="#contact" className="block">
+            <PinContainer
+              title="Iniciar Consulta"
+              containerClassName="w-full"
             >
-              <div className="bg-slate-700/90 rounded-lg p-8 h-full">
-                <div className="text-5xl font-bold text-cyan-400 mb-4">{step.number}</div>
-                <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
-                <p className="text-gray-300">{step.description}</p>
+              <div className="bg-slate-800/90 rounded-lg p-8 h-full flex flex-col items-center text-center">
+                <div className="text-5xl font-bold text-cyan-400 mb-4">01</div>
+                <Search className="w-12 h-12 text-cyan-400 mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-3">Descubrimiento</h3>
+                <p className="text-gray-300 mb-6">Analizamos las necesidades y desafíos de su negocio</p>
+                <button className="px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-400 transition-colors">
+                  Agendar Consulta
+                </button>
               </div>
-            </div>
-          ))}
+            </PinContainer>
+          </Link>
+
+          <Link href="#contact" className="block">
+            <PinContainer
+              title="Ver Estrategia"
+              containerClassName="w-full"
+            >
+              <div className="bg-slate-800/90 rounded-lg p-8 h-full flex flex-col items-center text-center">
+                <div className="text-5xl font-bold text-cyan-400 mb-4">02</div>
+                <Lightbulb className="w-12 h-12 text-cyan-400 mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-3">Estrategia</h3>
+                <p className="text-gray-300 mb-6">Desarrollamos una estrategia de solución personalizada</p>
+                <button className="px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-400 transition-colors">
+                  Ver Propuesta
+                </button>
+              </div>
+            </PinContainer>
+          </Link>
+
+          <Link href="#contact" className="block">
+            <PinContainer
+              title="Seguir Desarrollo"
+              containerClassName="w-full"
+            >
+              <div className="bg-slate-800/90 rounded-lg p-8 h-full flex flex-col items-center text-center">
+                <div className="text-5xl font-bold text-cyan-400 mb-4">03</div>
+                <Code className="w-12 h-12 text-cyan-400 mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-3">Desarrollo</h3>
+                <p className="text-gray-300 mb-6">Nuestros expertos construyen su solución personalizada</p>
+                <button className="px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-400 transition-colors">
+                  Ver Progreso
+                </button>
+              </div>
+            </PinContainer>
+          </Link>
+
+          <Link href="#contact" className="block">
+            <PinContainer
+              title="Comenzar"
+              containerClassName="w-full"
+            >
+              <div className="bg-slate-800/90 rounded-lg p-8 h-full flex flex-col items-center text-center">
+                <div className="text-5xl font-bold text-cyan-400 mb-4">04</div>
+                <Rocket className="w-12 h-12 text-cyan-400 mb-4" />
+                <h3 className="text-2xl font-bold text-white mb-3">Implementación</h3>
+                <p className="text-gray-300 mb-6">Implementamos y optimizamos su solución</p>
+                <button className="px-6 py-2 bg-cyan-500 text-white rounded-full hover:bg-cyan-400 transition-colors">
+                  Lanzar Proyecto
+                </button>
+              </div>
+            </PinContainer>
+          </Link>
         </div>
       </div>
     </section>

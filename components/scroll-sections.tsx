@@ -41,14 +41,14 @@ export default function ScrollSections() {
     };
   }, []);
   
-  // Apply scroll effects to hero text
+  // Apply scroll effects to hero content
   useEffect(() => {
-    const heroTextElement = document.querySelector('.hero-text') as HTMLElement;
-    if (heroTextElement) {
-      heroTextElement.style.opacity = `${1 - scrollProgress * 1.5}`;
-      heroTextElement.style.filter = `blur(${scrollProgress * 5}px)`;
-      heroTextElement.style.transform = `scale(${1 - scrollProgress * 0.05})`;
-      heroTextElement.style.transition = 'opacity 0.2s, filter 0.2s, transform 0.2s';
+    const heroContent = document.querySelector('.lamp-content') as HTMLElement;
+    if (heroContent) {
+      heroContent.style.opacity = `${1 - scrollProgress * 1.5}`;
+      heroContent.style.filter = `blur(${scrollProgress * 5}px)`;
+      heroContent.style.transform = `scale(${1 - scrollProgress * 0.05})`;
+      heroContent.style.transition = 'opacity 0.2s, filter 0.2s, transform 0.2s';
     }
   }, [scrollProgress]);
   
@@ -57,13 +57,23 @@ export default function ScrollSections() {
       ref={sectionRef} 
       className="scroll-section"
       style={{ 
-        minHeight: "70vh" // Further reduced height
+        minHeight: "100vh", // Full viewport height
+        paddingTop: 0,
+        marginTop: 0,
+        position: "relative" // Ensure proper positioning
       }}
     >
       {/* Hero Section - only text will be affected by scroll */}
       <div 
         className="sticky-section z-10"
         ref={heroRef}
+        style={{
+          position: "sticky", // Ensure sticky positioning
+          top: 0,
+          paddingTop: 0,
+          marginTop: 0,
+          height: "100vh" // Full viewport height
+        }}
       >
         <Hero />
       </div>

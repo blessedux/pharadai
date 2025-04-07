@@ -15,21 +15,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${montserrat.variable} ${favorite.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${favorite.variable} dark`} suppressHydrationWarning>
       <head>
-        {/* Preconnect to external domains */}
-        <link rel="preconnect" href="https://websites.godaddy.com" />
-        
-        {/* Preload critical assets */}
-        <link
-          rel="preload"
-          href="https://websites.godaddy.com/categories/v4/videos/raw/video/uA41GmyyG8IMaxXdb"
-          as="video"
-          type="video/mp4"
-        />
+     
       </head>
-      <body className={montserrat.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <body className={`${montserrat.className} dark:bg-slate-950`} suppressHydrationWarning>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>
       </body>

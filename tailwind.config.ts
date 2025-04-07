@@ -99,6 +99,9 @@ const config: Config = {
         "fade-in": "fade-in 1s ease-in-out 1s forwards",
         "logo-fade-in": "logo-fade-in 0.7s ease-out forwards",
       },
+      backgroundImage: {
+        'gradient-conic': 'conic-gradient(var(--conic-position), var(--tw-gradient-stops))',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
