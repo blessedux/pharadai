@@ -12,7 +12,7 @@ import GeminiEffectWrapper from "@/components/gemini-effect-wrapper"
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between overflow-hidden relative z-10" style={{ marginBottom: "calc(16rem - 100px)" }}>
+      <main className="flex min-h-screen flex-col items-center justify-between relative z-10" style={{ marginBottom: "calc(16rem - 100px)" }}>
         {/* Hero section */}
         <div className="relative w-full">
           <ScrollSections />
@@ -40,7 +40,7 @@ export default function Home() {
           </div>
           
           {/* Other sections */}
-          <div className="w-full">
+          <div className="w-full relative">
             <ProcessSection />
             <TeamSection />
             <ProjectSection />

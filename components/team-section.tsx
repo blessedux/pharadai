@@ -1,84 +1,73 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import TeamMember from "@/components/team-member"
 
 export default function TeamSection() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
+  const sectionRef = useRef<HTMLElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { 
-        type: "spring", 
-        stiffness: 100, 
-        damping: 15 
-      }
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Target all team cards
+    const cards = gsap.utils.toArray<HTMLElement>('.team-card')
+    
+    // Create initial state (hidden)
+    gsap.set(cards, { opacity: 0, y: 50, rotateX: 10 })
+    
+    // Create the animation
+    cards.forEach((card, index) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        rotateX: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: index * 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom bottom",
+          toggleActions: "play none none reverse",
+          once: false
+        }
+      })
+    })
+    
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
-  };
+  }, [])
 
   return (
     <section 
-      className="w-full py-24 pb-32"
+      className="w-full py-24 pb-32 relative z-10"
       id="team"
+      ref={sectionRef}
       style={{ 
-        contain: 'content',
+        background: "linear-gradient(to bottom, rgb(51 65 85), rgb(15 23 42))",
         backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgb(51 65 85), rgb(15 23 42))",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
       <div className="container mx-auto px-4">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ 
-            duration: 0.6, 
-            type: "spring", 
-            stiffness: 50
-          }}
-        >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-          >
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Nuestro Equipo
-          </motion.h2>
-          <motion.p 
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Un equipo multidisciplinario de expertos en tecnología, negocios y normativa urbana
-          </motion.p>
-        </motion.div>
+          </p>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <motion.div variants={itemVariants} className="flex h-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" ref={cardsRef}>
+          <div className="flex h-full team-card">
             <TeamMember
               name="Álvaro Acevedo"
               role="CTO y Founder"
@@ -90,8 +79,9 @@ export default function TeamSection() {
                 github: "https://github.com"
               }}
             />
-          </motion.div>
-          <motion.div variants={itemVariants} className="flex h-full">
+          </div>
+          
+          <div className="flex h-full team-card">
             <TeamMember
               name="Franco Enrique Parra Campos"
               role="Back Office Engineer"
@@ -103,8 +93,9 @@ export default function TeamSection() {
                 github: "https://github.com"
               }}
             />
-          </motion.div>
-          <motion.div variants={itemVariants} className="flex h-full">
+          </div>
+          
+          <div className="flex h-full team-card">
             <TeamMember
               name="Simon Espínola Marín"
               role="Director Comercial y Co-Founder"
@@ -116,8 +107,9 @@ export default function TeamSection() {
                 github: "https://github.com"
               }}
             />
-          </motion.div>
-          <motion.div variants={itemVariants} className="flex h-full">
+          </div>
+          
+          <div className="flex h-full team-card">
             <TeamMember
               name="Joaquín Farfán Torres"
               role="Desarrollador Front-end"
@@ -129,8 +121,9 @@ export default function TeamSection() {
                 github: "https://github.com"
               }}
             />
-          </motion.div>
-          <motion.div variants={itemVariants} className="flex h-full">
+          </div>
+          
+          <div className="flex h-full team-card">
             <TeamMember
               name="Francisca Salazar Herrera"
               role="Analista de Proyectos Urbanos"
@@ -141,8 +134,8 @@ export default function TeamSection() {
                 linkedin: "https://linkedin.com"
               }}
             />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   )

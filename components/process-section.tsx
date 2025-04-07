@@ -1,30 +1,88 @@
 "use client"
 
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { PinContainer } from "@/components/ui/3d-pin"
 import { Search, Lightbulb, Code, Rocket } from "lucide-react"
 import Link from "next/link"
 
 export default function ProcessSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const titleRef = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Title animation
+    gsap.fromTo(
+      [titleRef.current?.querySelector('h2'), titleRef.current?.querySelector('p')],
+      { 
+        opacity: 0, 
+        y: 30 
+      },
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1,
+        stagger: 0.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          toggleActions: "play none none none",
+        }
+      }
+    )
+    
+    // Process cards animation
+    const cards = gsap.utils.toArray<HTMLElement>('.process-card')
+    gsap.set(cards, { opacity: 0, y: 50, rotateY: 5 })
+    
+    cards.forEach((card, index) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        rotateY: 0,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: index * 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 65%",
+          toggleActions: "play none none reverse",
+        }
+      })
+    })
+    
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [])
+
   return (
     <section 
-      className="w-full py-24 pb-32"
+      className="w-full py-24 pb-32 relative z-10"
       id="process"
+      ref={sectionRef}
       style={{ 
-        contain: 'content',
         background: 'linear-gradient(to bottom, #1e293b, #334155)',
         backgroundImage: 'linear-gradient(to bottom, rgb(30 41 59), rgb(51 65 85))'
       }}
     >
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16" ref={titleRef}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Nuestro Proceso</h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Seguimos una metodología probada para entregar resultados excepcionales
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          <Link href="#contact" className="block">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" ref={cardsRef}>
+          <Link href="#contact" className="block process-card">
             <PinContainer
               title="Iniciar Consulta"
               containerClassName="w-full"
@@ -41,7 +99,7 @@ export default function ProcessSection() {
             </PinContainer>
           </Link>
 
-          <Link href="#contact" className="block">
+          <Link href="#contact" className="block process-card">
             <PinContainer
               title="Ver Estrategia"
               containerClassName="w-full"
@@ -58,7 +116,7 @@ export default function ProcessSection() {
             </PinContainer>
           </Link>
 
-          <Link href="#contact" className="block">
+          <Link href="#contact" className="block process-card">
             <PinContainer
               title="Seguir Desarrollo"
               containerClassName="w-full"
@@ -75,7 +133,7 @@ export default function ProcessSection() {
             </PinContainer>
           </Link>
 
-          <Link href="#contact" className="block">
+          <Link href="#contact" className="block process-card">
             <PinContainer
               title="Comenzar"
               containerClassName="w-full"

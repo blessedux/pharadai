@@ -1,6 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 interface ProjectCardProps {
   title: string
@@ -14,16 +16,8 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl }: ProjectCardProps) => {
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{
-        delay: delay * 0.1,
-        duration: 0.8,
-        ease: "easeOut"
-      }}
-      viewport={{ once: true }}
-      className="group bg-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2"
+    <div 
+      className="project-card group bg-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2"
     >
       <div className="relative h-64 overflow-hidden">
         <div 
@@ -70,11 +64,49 @@ const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl 
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export default function ProjectSection() {
+  const sectionRef = useRef<HTMLElement>(null)
+  const projectsRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Target all project cards
+    const cards = gsap.utils.toArray<HTMLElement>('.project-card')
+    
+    // Create initial state (hidden)
+    gsap.set(cards, { opacity: 0, y: 70, scale: 0.95 })
+    
+    // Create the animation
+    cards.forEach((card, index) => {
+      gsap.to(card, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: index * 0.1,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom bottom",
+          toggleActions: "play none none reverse",
+          once: false
+        }
+      })
+    })
+    
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+    }
+  }, [])
+
   const projects = [
     {
       title: "Genzee",
@@ -135,36 +167,24 @@ export default function ProjectSection() {
   return (
     <section 
       id="projects" 
-      className="w-full py-24 pb-24"
+      className="w-full py-24 pb-24 relative z-10"
+      ref={sectionRef}
       style={{ 
         background: 'linear-gradient(to bottom, #0f172a, #020617)',
         backgroundImage: 'linear-gradient(to bottom, rgb(15 23 42), rgb(2 6 23))',
-        contain: 'content' 
       }}
     >
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-5xl font-bold text-white mb-6"
-          >
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Nuestra Experiencia
-          </motion.h2>
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="text-xl text-gray-300 max-w-3xl mx-auto"
-          >
+          </h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Transformando empresas con soluciones de IA innovadoras y personalizadas
-          </motion.p>
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" ref={projectsRef}>
           {projects.map((project, index) => (
             <ProjectCard key={index} {...project} />
           ))}
