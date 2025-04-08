@@ -13,30 +13,7 @@ export default function TeamSection() {
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
     
-    // Target all team cards
-    const cards = gsap.utils.toArray<HTMLElement>('.team-card')
-    
-    // Create initial state (hidden)
-    gsap.set(cards, { opacity: 0, y: 50, rotateX: 10 })
-    
-    // Create the animation
-    cards.forEach((card, index) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.8,
-        ease: "power2.out",
-        delay: index * 0.1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom bottom",
-          toggleActions: "play none none reverse",
-          once: false
-        }
-      })
-    })
+    // Remove all animations for team cards to ensure they're always visible
     
     // Cleanup function
     return () => {
@@ -57,7 +34,7 @@ export default function TeamSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10" ref={cardsRef}>
-          <div className="flex h-full team-card">
+          <div className="flex h-full team-card" style={{ opacity: 1, visibility: "visible" }}>
             <TeamMember
               name="Álvaro Acevedo"
               role="CTO y Founder"
@@ -71,7 +48,7 @@ export default function TeamSection() {
             />
           </div>
           
-          <div className="flex h-full team-card">
+          <div className="flex h-full team-card" style={{ opacity: 1, visibility: "visible" }}>
             <TeamMember
               name="Franco Enrique Parra Campos"
               role="Back Office Engineer"
@@ -85,7 +62,7 @@ export default function TeamSection() {
             />
           </div>
           
-          <div className="flex h-full team-card">
+          <div className="flex h-full team-card" style={{ opacity: 1, visibility: "visible" }}>
             <TeamMember
               name="Simon Espínola Marín"
               role="Director Comercial y Co-Founder"
@@ -93,13 +70,13 @@ export default function TeamSection() {
               delay={0}
               bio="Economista de la Universidad de Chile, con estudios en innovación social en Aalto University (Finlandia) y certificación en Project Management (MIT xPro). Ex CEO de Naturland, donde lideró un proceso de expansión y transformación digital."
               socialLinks={{
-                linkedin: "https://linkedin.com",
-                github: "https://github.com"
+                linkedin: "https://www.linkedin.com/in/simon-esp%C3%ADnola-mar%C3%ADn-06a78b86/",
+                twitter: "https://x.com/Cryptosadhu1"
               }}
             />
           </div>
           
-          <div className="flex h-full team-card">
+          <div className="flex h-full team-card" style={{ opacity: 1, visibility: "visible" }}>
             <TeamMember
               name="Joaquín Farfán Torres"
               role="Desarrollador Front-end"
@@ -107,13 +84,13 @@ export default function TeamSection() {
               delay={0}
               bio="Desarrollador con formación técnica en desarrollo web y diseño UX, con estudios en Front-End Engineering y diseño de experiencia de usuario. Cuenta con experiencia en la creación de interfaces digitales centradas en el usuario, especialmente en plataformas Web3."
               socialLinks={{
-                twitter: "https://twitter.com",
-                github: "https://github.com"
+                twitter: "https://x.com/blessed_ux",
+                github: "https://github.com/blessedux"
               }}
             />
           </div>
           
-          <div className="flex h-full team-card">
+          <div className="flex h-full team-card" style={{ opacity: 1, visibility: "visible" }}>
             <TeamMember
               name="Francisca Salazar Herrera"
               role="Analista de Proyectos Urbanos"

@@ -31,8 +31,9 @@ export default function ProcessSection() {
         ease: "power2.out",
         scrollTrigger: {
           trigger: titleRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none",
+          start: "top 90%",
+          toggleActions: "play none none reset",
+          once: false
         }
       }
     )
@@ -50,9 +51,10 @@ export default function ProcessSection() {
         ease: "power2.out",
         delay: index * 0.2,
         scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 65%",
-          toggleActions: "play none none reverse",
+          trigger: card,
+          start: "top 90%",
+          toggleActions: "play none none reset",
+          once: false
         }
       })
     })

@@ -30,35 +30,14 @@ export default function ServicesSection() {
         ease: "power2.out",
         scrollTrigger: {
           trigger: titleRef.current,
-          start: "top 80%",
-          toggleActions: "play none none none"
+          start: "top 90%",
+          toggleActions: "play none none reset",
+          once: false
         }
       }
     )
     
-    // Service cards animation with staggered effect
-    const cards = gsap.utils.toArray<HTMLElement>('.bento-card')
-    
-    gsap.set(cards, { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.95
-    })
-    
-    gsap.to(cards, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.15,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: cardsRef.current,
-        start: "top 75%",
-        end: "bottom bottom",
-        toggleActions: "play none none reverse"
-      }
-    })
+    // Remove all animations for bento cards to ensure they're always visible
     
     // Cleanup function
     return () => {
@@ -69,41 +48,31 @@ export default function ServicesSection() {
   return (
     <div className="w-full">
       <section 
-        className="w-full pb-16 relative z-10"
+        className="w-full pb-16 relative"
         id="services"
         ref={sectionRef}
         style={{ 
-          backgroundColor: '#020617',
           marginTop: "0",
           position: "relative",
-          zIndex: 20,
+          zIndex: 10, // Ensure it's between stars overlay and background
           paddingTop: "0",
           borderTop: "none",
-          width: "100%"
+          width: "100%",
         }}
       >
-        <div 
-          className="absolute top-0 left-0 right-0 h-20" 
-          style={{ 
-            backgroundColor: "#020617",
-            zIndex: 1,
-            width: "100%"
-          }}
-        ></div>
-        
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16 mt-24" ref={titleRef}>
+          <div className="text-center mb-16 mt-24 backdrop-blur-md bg-slate-900/50 p-8 rounded-xl" ref={titleRef}>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Pharadai</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Transformamos ideas en soluciones inteligentes. Usamos IA y software a medida para optimizar tu negocio, hacerlo más eficiente y ayudarte a crecer.
             </p>
           </div>
 
-          <div ref={cardsRef}>
+          <div ref={cardsRef} className="relative z-20">
             <BentoGrid className="grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <BentoCard
                 name="Agentes de IA Corporativos"
-                className="sm:col-span-1 lg:col-span-2 bg-slate-900/50 bento-card"
+                className="sm:col-span-1 lg:col-span-2 bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10" />
                 }
@@ -117,7 +86,7 @@ export default function ServicesSection() {
               />
               <BentoCard
                 name="Automatización Inteligente"
-                className="bg-slate-900/50 bento-card"
+                className="bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10" />
                 }
@@ -130,7 +99,7 @@ export default function ServicesSection() {
               />
               <BentoCard
                 name="Desarrollo Web 3.0"
-                className="bg-slate-900/50 bento-card"
+                className="bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10" />
                 }
@@ -144,7 +113,7 @@ export default function ServicesSection() {
               />
               <BentoCard
                 name="Infraestructura Cloud & DevOps"
-                className="sm:col-span-1 lg:col-span-2 bg-slate-900/50 bento-card"
+                className="sm:col-span-1 lg:col-span-2 bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10" />
                 }
@@ -157,7 +126,7 @@ export default function ServicesSection() {
               />
               <BentoCard
                 name="Soluciones de Big Data"
-                className="bg-slate-900/50 bento-card"
+                className="sm:col-span-2 lg:col-span-2 bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-indigo-500/10" />
                 }
@@ -170,7 +139,7 @@ export default function ServicesSection() {
               />
               <BentoCard
                 name="Ciberseguridad Avanzada"
-                className="bg-slate-900/50 bento-card"
+                className="bg-slate-900/70 bento-card"
                 background={
                   <div className="absolute inset-0 bg-gradient-to-br from-slate-500/10 to-zinc-500/10" />
                 }

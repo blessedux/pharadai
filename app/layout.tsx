@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
      
       </head>
-      <body className={`${montserrat.className} dark:bg-slate-950`} suppressHydrationWarning>
+      <body className={`${montserrat.className} relative`} suppressHydrationWarning>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           {children}
         </ThemeProvider>

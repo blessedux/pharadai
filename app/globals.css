@@ -30,7 +30,7 @@
   --border: 217.2 32.6% 17.5%;
   --input: 217.2 32.6% 17.5%;
   --ring: 196 80% 50%;
-
+  
   /* Z-index layers */
   --z-navbar: 9999;
   --footer-height: 16rem;
@@ -41,7 +41,8 @@
 }
 
 body {
-  @apply bg-slate-950 text-white;
+  @apply text-white;
+  background-color: transparent; /* Let the stars background show through */
   overflow-x: hidden;
   content-visibility: auto;
   contain-intrinsic-size: 1px 5000px; /* Approximate size hint for page */
@@ -50,6 +51,8 @@ body {
 
 html {
   scroll-behavior: smooth;
+  height: 100%;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
   
   /* Improve scrolling performance */
   @media (prefers-reduced-motion: no-preference) {
@@ -69,8 +72,62 @@ section:not(.sticky-section) {
   contain-intrinsic-size: 1px 800px; /* Approximate height hint for sections */
   will-change: auto;
   position: relative; /* Ensure sections stay above the footer */
-  z-index: 10; /* Higher z-index than the footer */
-  background-color: transparent; /* Allow gradient backgrounds to work */
+  z-index: 1;
+}
+
+/* Section content */
+section > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Base section styles */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+/* Remove section-specific transparent backgrounds */
+section#services {
+  background-color: rgba(2, 6, 23, 0.9) !important;
+}
+
+section#process {
+  background: linear-gradient(to bottom, #020617, #0f172a) !important;
+}
+
+section#projects {
+  background: linear-gradient(to bottom, #0f172a, #1e293b) !important;
+}
+
+section#team {
+  background: linear-gradient(to bottom, #1e293b, #334155) !important;
+  background-image: url('/patterns/grid.svg'), linear-gradient(to bottom, #1e293b, #334155) !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+
+/* Special treatment for hero section */
+section:first-child {
+  background-color: transparent !important;
+}
+
+/* Make all card elements visible by default, overriding any GSAP animations */
+.bento-card, 
+.project-card,
+.team-card,
+.process-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+
+/* Ensure BentoGrid is fully visible */
+.BentoGrid {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 /* Make sure the last section has appropriate spacing for footer reveal */
@@ -91,13 +148,16 @@ img, video {
 
 /* Footer reveal effect */
 footer {
-  transition: transform 0.3s ease-out;
-  will-change: transform;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  will-change: opacity, transform;
+  z-index: 999;
+  position: relative;
 }
 
 /* Footer is initially hidden below the viewport */
 .footer-hidden {
-  transform: translateY(100%);
+  opacity: 0;
+  transform: translateY(50px);
 }
 
 /* Glassmorphism effect */
@@ -169,5 +229,196 @@ footer {
 /* Lamp component styles */
 .bg-gradient-conic {
   background-image: conic-gradient(var(--conic-position), var(--tw-gradient-stops));
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+/* Stars Animation - Enhanced for visibility */
+#stars, #stars2, #stars3 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  will-change: transform;
+}
+
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 121px 455px #FFF, 1642px 683px #FFF, 832px 1584px #FFF, 1889px 968px #FFF, 741px 1728px #FFF, 
+    671px 1135px #FFF, 1226px 1183px #FFF, 1018px 63px #FFF, 170px 523px #FFF, 1489px 413px #FFF, 
+    1623px 194px #FFF, 1137px 367px #FFF, 535px 1212px #FFF, 716px 1126px #FFF, 1592px 1065px #FFF,
+    1875px 1215px #FFF, 452px 1728px #FFF, 1209px 484px #FFF, 1975px 1097px #FFF, 548px 1476px #FFF,
+    176px 103px #FFF, 92px 1327px #FFF, 1247px 1496px #FFF, 970px 633px #FFF, 599px 343px #FFF;
+  animation: animStar 50s linear infinite;
+}
+
+#stars:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 121px 455px #FFF, 1642px 683px #FFF, 832px 1584px #FFF, 1889px 968px #FFF, 741px 1728px #FFF, 
+    671px 1135px #FFF, 1226px 1183px #FFF, 1018px 63px #FFF, 170px 523px #FFF, 1489px 413px #FFF, 
+    1623px 194px #FFF, 1137px 367px #FFF, 535px 1212px #FFF, 716px 1126px #FFF, 1592px 1065px #FFF,
+    1875px 1215px #FFF, 452px 1728px #FFF, 1209px 484px #FFF, 1975px 1097px #FFF, 548px 1476px #FFF,
+    176px 103px #FFF, 92px 1327px #FFF, 1247px 1496px #FFF, 970px 633px #FFF, 599px 343px #FFF;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 671px 1912px #FFF, 58px 37px #FFF, 207px 959px #FFF, 1364px 421px #FFF, 875px 873px #FFF, 
+    1190px 607px #FFF, 818px 923px #FFF, 298px 374px #FFF, 1002px 1341px #FFF, 1281px 480px #FFF, 
+    1042px 549px #FFF, 1383px 1558px #FFF, 361px 1573px #FFF, 264px 1789px #FFF, 275px 1587px #FFF,
+    338px 94px #FFF, 1870px 1418px #FFF, 1765px 644px #FFF, 173px 326px #FFF, 349px 1442px #FFF;
+  animation: animStar 100s linear infinite;
+}
+
+#stars2:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 671px 1912px #FFF, 58px 37px #FFF, 207px 959px #FFF, 1364px 421px #FFF, 875px 873px #FFF, 
+    1190px 607px #FFF, 818px 923px #FFF, 298px 374px #FFF, 1002px 1341px #FFF, 1281px 480px #FFF, 
+    1042px 549px #FFF, 1383px 1558px #FFF, 361px 1573px #FFF, 264px 1789px #FFF, 275px 1587px #FFF,
+    338px 94px #FFF, 1870px 1418px #FFF, 1765px 644px #FFF, 173px 326px #FFF, 349px 1442px #FFF;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 851px 202px #FFF, 1240px 1181px #FFF, 342px 145px #FFF, 1423px 900px #FFF, 51px 1413px #FFF, 
+    1777px 261px #FFF, 625px 1062px #FFF, 815px 1187px #FFF, 1924px 895px #FFF, 1003px 763px #FFF, 
+    71px 1395px #FFF, 1445px 410px #FFF, 622px 730px #FFF, 1328px 52px #FFF, 850px 1641px #FFF;
+  animation: animStar 150s linear infinite;
+}
+
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 851px 202px #FFF, 1240px 1181px #FFF, 342px 145px #FFF, 1423px 900px #FFF, 51px 1413px #FFF, 
+    1777px 261px #FFF, 625px 1062px #FFF, 815px 1187px #FFF, 1924px 895px #FFF, 1003px 763px #FFF, 
+    71px 1395px #FFF, 1445px 410px #FFF, 622px 730px #FFF, 1328px 52px #FFF, 850px 1641px #FFF;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+@keyframes floatSlow {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2000px); }
+}
+
+@keyframes floatMedium {
+  from { transform: translateY(0); }
+  to { transform: translateY(-1500px); }
+}
+
+/* Remove unnecessary keyframes */
+@keyframes move-stars {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 1000px;
+  }
+}
+
+/* Footer animations */
+.footer {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.footer-hidden {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+/* Stars Background Implementation */
+.stars-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.stars-container .stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1744px 122px #FFF, 134px 1321px #FFF, 1574px 543px #FFF, 
+    1892px 1854px #FFF, 556px 611px #FFF, 1855px 244px #FFF, 
+    767px 1199px #FFF, 1742px 1203px #FFF, 568px 817px #FFF, 
+    1010px 1953px #FFF, 1498px 383px #FFF, 1114px 1128px #FFF, 
+    1944px 88px #FFF, 858px 1283px #FFF, 758px 445px #FFF, 
+    1045px 1870px #FFF, 1307px 1944px #FFF, 1847px 1515px #FFF;
+  animation: animateStar 100s linear infinite;
+}
+
+.stars-container .stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 1148px 1322px #FFF, 1334px 1956px #FFF, 1715px 1103px #FFF, 
+    1536px 836px #FFF, 1599px 1298px #FFF, 1342px 1722px #FFF, 
+    1190px 979px #FFF, 1253px 812px #FFF, 1154px 1316px #FFF, 
+    551px 1567px #FFF, 584px 540px #FFF, 1931px 1278px #FFF, 
+    1314px 861px #FFF, 73px 1866px #FFF, 1070px 1791px #FFF;
+  animation: animateStar 150s linear infinite;
+}
+
+.stars-container .stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 387px 518px #FFF, 1443px 79px #FFF, 452px 1863px #FFF, 
+    950px 47px #FFF, 1597px 1819px #FFF, 999px 841px #FFF, 
+    1099px 949px #FFF, 1915px 1729px #FFF, 1347px 1462px #FFF, 
+    1237px 1758px #FFF, 540px 1741px #FFF, 786px 1931px #FFF;
+  animation: animateStar 200s linear infinite;
+}
+
+@keyframes animateStar {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
 }
 

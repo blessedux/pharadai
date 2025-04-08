@@ -45,7 +45,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return newArray;
 };
 
-export default function PartnerLogoCarousel() {
+export default function LogoCarousel() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const logoCount = isMobile ? 3 : 6;
   const [mounted, setMounted] = useState(false);
@@ -236,64 +236,47 @@ export default function PartnerLogoCarousel() {
   }
   
   return (
-    <section 
-      ref={sectionRef}
-      className="w-full"
+    <div 
+      ref={sectionRef} 
+      className="relative w-full overflow-hidden" 
       style={{
-        ...sectionStyle,
-        position: "relative",
-        height: "30vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        willChange: "opacity, filter, transform",
-        paddingBottom: 0,
-        marginBottom: 0,
-        backgroundColor: "#020617"
+        background: "transparent", // Ensure no background
+        backdropFilter: "none"     // Disable any backdrop filter
       }}
     >
-      <div className="container mx-auto px-4 h-full flex items-center">
-        <div className="w-full overflow-hidden flex justify-center items-center">
-          <div className={cn(
-            "grid gap-x-8 gap-y-10 md:gap-x-16 md:gap-y-16 place-items-center w-full",
-            isMobile ? "grid-cols-3" : "grid-cols-6"
-          )}>
-            {logoSlots.map((slot) => (
-              <div 
-                key={`slot-${slot.id}`} 
-                className="relative h-16 w-16 md:h-20 md:w-20 flex items-center justify-center"
-              >
-                <div 
-                  className={cn(
-                    "absolute inset-0 flex items-center justify-center",
-                    "transition-all duration-400 ease-in-out",
-                    slot.isVisible 
-                      ? "opacity-100 blur-0 scale-100 translate-y-0" 
-                      : "opacity-0 blur-md scale-90 translate-y-2"
-                  )}
-                >
-                  <div 
-                    className={cn(
-                      "w-full h-full relative flex items-center justify-center",
-                      "grayscale opacity-60 hover:grayscale-0 hover:opacity-100 hover:scale-110",
-                      "transition-all duration-500 ease-out"
-                    )}
-                  >
-                    <Image
-                      src={slot.logo.src}
-                      alt={slot.logo.alt}
-                      width={60} 
-                      height={60}
-                      className="w-auto h-12 md:h-14 object-contain drop-shadow-lg"
-                      priority
-                    />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div 
+        className="container mx-auto px-4 py-6 flex flex-col items-center justify-center"
+        style={sectionStyle}
+      >
+        <h3 className="text-lg md:text-xl text-center font-medium text-white/70 mb-6">
+          Tecnologías que usamos
+        </h3>
+        <div className="w-full max-w-4xl flex justify-around flex-wrap gap-y-8">
+          {logoSlots.map((slot) => (
+            <div
+              key={slot.id}
+              className={cn(
+                "transition-all duration-500 ease-in-out flex items-center justify-center",
+                "w-1/3 sm:w-1/4 md:w-1/6 px-3 opacity-0"
+              )}
+              style={{
+                opacity: slot.isVisible ? 0.7 : 0,
+                transform: `translateY(${slot.isVisible ? '0' : '20px'})`,
+                filter: `blur(${slot.isVisible ? '0' : '10px'})`,
+              }}
+            >
+              <Image
+                src={slot.logo.src}
+                alt={slot.logo.alt}
+                width={80}
+                height={40}
+                className="w-auto h-8 md:h-10"
+                style={{ maxWidth: "100%", height: "auto" }}
+              />
+            </div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 } 

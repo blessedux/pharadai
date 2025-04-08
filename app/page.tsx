@@ -1,64 +1,118 @@
 "use client"
 
-import ServicesSection from "@/components/services-section"
-import ProcessSection from "@/components/process-section"
-import TeamSection from "@/components/team-section"
-import ProjectSection from "@/components/project-section"
-import Footer from "@/components/footer"
-import ScrollSections from "@/components/scroll-sections"
-import PartnerLogoCarousel from "@/components/logo-carousel"
-import GeminiEffectWrapper from "@/components/gemini-effect-wrapper"
+import React, { useEffect, useRef } from "react"
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Navbar from "../components/navbar"
+import HeroSection from "../components/hero"
+import LogoCarousel from "../components/logo-carousel"
+import ServicesSection from "../components/services-section"
+import ProcessSection from "../components/process-section"
+import ProjectSection from "../components/project-section"
+import TeamSection from "../components/team-section"
+import GeminiEffectWrapper from "../components/gemini-effect-wrapper"
+import Footer from "../components/footer"
+import { CursorSplash } from "@/components/ui/cursor-splash"
 
-export default function Home() {
+export default function HomePage() {
+  const starsContainerRef = useRef<HTMLDivElement>(null)
+  
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Force refresh after component mount to ensure proper positioning
+    const timeout = setTimeout(() => {
+      ScrollTrigger.refresh(true)
+    }, 500)
+    
+    return () => {
+      clearTimeout(timeout)
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
+
+  // Define a single background color for all top sections to ensure consistency
+  const topSectionsStyle = {
+    backgroundColor: "#030712", // Use a solid color value for better consistency
+    backgroundImage: "none",    // No gradient to avoid rendering inconsistencies
+    backdropFilter: "none"      // No blur to ensure exact match
+  }
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between bg-black text-white overflow-hidden">
+    <main className="relative w-full overflow-x-hidden bg-black min-h-screen">
+      {/* CSS-based Stars Background */}
+      <div className="stars-container">
+        <div className="stars"></div>
+        <div className="stars2"></div>
+        <div className="stars3"></div>
+      </div>
+      
+      {/* Dark gradient overlay to enhance stars visibility */}
+      <div 
+        className="fixed top-0 left-0 w-full h-full z-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse at bottom, rgba(10,10,30,0.2) 0%, rgba(0,0,10,0.4) 100%)"
+        }}
+      />
+      
       {/* Hero Section */}
-      <section className="w-full min-h-screen flex flex-col items-center justify-center relative bg-black">
-        <div className="relative w-full">
-          <ScrollSections />
-        </div>
+      <section 
+        className="relative h-[90vh] w-full z-20"
+        style={topSectionsStyle}
+      >
+        <HeroSection />
+        <CursorSplash color="rgba(100, 180, 255, 0.2)" size={250} />
       </section>
-
+      
       {/* Logo Carousel Section */}
-      <section className="w-full bg-black relative z-10">
-        <div className="w-full" style={{ height: "30vh" }}>
-          <PartnerLogoCarousel />
-        </div>
+      <section 
+        className="relative w-full py-12 z-20 mt-[-5vh]"
+        style={topSectionsStyle}
+      >
+        <LogoCarousel />
       </section>
-
+      
       {/* Services Section */}
-      <section id="services" className="w-full bg-[#020617] relative z-10">
+      <section 
+        className="relative w-full py-20 z-20"
+        style={topSectionsStyle}
+      >
         <ServicesSection />
       </section>
-
+      
       {/* Process Section */}
-      <section id="process" className="w-full relative z-10" style={{
-        background: "linear-gradient(to bottom, #020617, #0f172a)"
-      }}>
+      <section 
+        className="relative w-full py-24 z-20"
+        style={{ 
+          background: "linear-gradient(to bottom, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.98))"
+        }}
+      >
         <ProcessSection />
       </section>
-
-      {/* Project Section */}
-      <section id="projects" className="w-full relative z-10" style={{
-        background: "linear-gradient(to bottom, #0f172a, #1e293b)"
-      }}>
+      
+      {/* Projects Section */}
+      <section 
+        className="relative w-full py-24 z-20"
+        style={{ 
+          background: "linear-gradient(to bottom, rgba(30, 41, 59, 0.98), rgba(51, 65, 85, 0.95))"
+        }}
+      >
         <ProjectSection />
       </section>
-
+      
       {/* Team Section */}
-      <section id="team" className="w-full relative z-10" style={{
-        background: "linear-gradient(to bottom, #1e293b, #334155)",
-        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, #1e293b, #334155)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}>
+      <section 
+        className="relative w-full py-24 z-20"
+        style={{
+          backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgba(51, 65, 85, 0.95), rgba(71, 85, 105, 0.9))",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <TeamSection />
       </section>
-
-      {/* Gemini Effect Section */}
-      <GeminiEffectWrapper />
-
-      {/* Footer with Parallax Reveal */}
+      
+      {/* Footer */}
       <Footer />
     </main>
   )

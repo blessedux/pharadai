@@ -20,6 +20,12 @@ const ProjectCard = ({ title, description, image, tags, delay, siteUrl, codeUrl,
   return (
     <div 
       className="project-card group bg-slate-800 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-cyan-500/10 hover:-translate-y-2"
+      style={{
+        // Ensures the card is fully visible
+        opacity: "1",
+        transform: "none",
+        visibility: "visible"
+      }}
     >
       <div className="relative h-64 overflow-hidden">
         <div 
@@ -78,30 +84,7 @@ export default function ProjectSection() {
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
     
-    // Target all project cards
-    const cards = gsap.utils.toArray<HTMLElement>('.project-card')
-    
-    // Create initial state (hidden)
-    gsap.set(cards, { opacity: 0, y: 70, scale: 0.95 })
-    
-    // Create the animation
-    cards.forEach((card, index) => {
-      gsap.to(card, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        ease: "power2.out",
-        delay: index * 0.1,
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom bottom",
-          toggleActions: "play none none reverse",
-          once: false
-        }
-      })
-    })
+    // Remove all animations for project cards to ensure they're always visible
     
     // Cleanup function
     return () => {

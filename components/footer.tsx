@@ -7,53 +7,106 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
-  const [isVisible, setIsVisible] = useState(false)
+  const bgTitleRef = useRef<HTMLHeadingElement>(null)
+  const [debugMode, setDebugMode] = useState(false)
 
   useEffect(() => {
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger)
     
-    // Create a timeline for the footer reveal animation
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: footerRef.current,
-        start: "top bottom-=100", // Start when the footer is 100px from the bottom of the viewport
-        end: "bottom bottom", // End when the bottom of the footer reaches the bottom of the viewport
-        scrub: 1.5, // Smooth scrubbing effect with a slight delay
-        onUpdate: (self) => {
-          // Update visibility state based on scroll progress
-          setIsVisible(self.progress > 0.1)
+    // Clean up any existing scroll triggers
+    ScrollTrigger.getAll().forEach(trigger => {
+      if (trigger.vars.id?.toString()?.includes("footer")) {
+        trigger.kill()
+      }
+    })
+
+    // Create a simple entry animation for the footer
+    gsap.fromTo(footerRef.current, 
+      { 
+        opacity: 0, 
+        y: 50 
+      }, 
+      { 
+        opacity: 1, 
+        y: 0, 
+        duration: 1,
+        scrollTrigger: {
+          trigger: footerRef.current,
+          start: "top 95%",
+          end: "top 75%",
+          scrub: 0.5,
+          id: "footer-reveal",
+          markers: debugMode,
+          once: false
         }
       }
+    )
+    
+    // Add parallax effect to the content inside footer
+    gsap.to(contentRef.current, {
+      y: -30, // Move content up slightly for parallax effect
+      ease: "power1.out",
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top 95%",
+        end: "bottom bottom", 
+        scrub: 0.8,
+        id: "footer-content-parallax",
+        markers: debugMode
+      }
     })
     
-    // Add parallax effect to the content
-    tl.to(contentRef.current, {
-      y: -50, // Move content up slightly for parallax effect
-      ease: "none"
+    // Add a more dramatic scale effect to the background title
+    gsap.to(bgTitleRef.current, {
+      scale: 1.2,
+      opacity: 0.4,
+      filter: "blur(2px)",
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top bottom", 
+        end: "bottom bottom", 
+        scrub: 1,
+        id: "footer-bg-parallax",
+        markers: debugMode
+      }
     })
-    
-    // Add a subtle scale effect to the background title
-    tl.to(".footer-bg-title", {
-      scale: 1.05,
-      opacity: 0.3,
-      ease: "none"
-    }, "<")
     
     return () => {
-      // Clean up by killing the ScrollTrigger
-      if (tl.scrollTrigger) {
-        tl.scrollTrigger.kill()
-      }
+      // Clean up by killing ScrollTriggers with specific IDs
+      ScrollTrigger.getAll().forEach(trigger => {
+        if (trigger.vars.id?.toString()?.includes("footer")) {
+          trigger.kill()
+        }
+      })
     }
-  }, [])
+  }, [debugMode])
 
   return (
     <footer 
       ref={footerRef}
       id="contact" 
-      className={`w-full py-12 bg-slate-900 relative z-[5] overflow-hidden min-h-[16rem] transition-opacity duration-500 ease-out ${!isVisible ? 'opacity-0' : 'opacity-100'}`}
+      className="footer w-full py-12 relative overflow-hidden min-h-[16rem] z-[60]"
+      style={{
+        transformOrigin: 'bottom',
+        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        boxShadow: '0 -10px 30px rgba(0, 0, 0, 0.5)'
+      }}
     >
+      {/* Debug controls - only visible in development */}
+      {process.env.NODE_ENV === 'development' && (
+        <div className="absolute top-4 right-4 z-50">
+          <button 
+            onClick={() => setDebugMode(!debugMode)}
+            className="bg-yellow-500 text-black px-3 py-1 rounded text-sm font-bold"
+          >
+            {debugMode ? 'Disable Debug' : 'Enable Debug'}
+          </button>
+        </div>
+      )}
+      
       <div 
         ref={contentRef}
         className="container mx-auto px-4 relative z-10"
@@ -98,6 +151,7 @@ export default function Footer() {
       {/* Large background title with parallax effect */}
       <div className="absolute -bottom-10 left-0 right-0 flex justify-center transform overflow-hidden">
         <h2 
+          ref={bgTitleRef}
           className="footer-bg-title text-[12rem] md:text-[16rem] font-extrabold text-gray-500/25 tracking-[0.3em] font-favorite whitespace-nowrap"
           style={{ fontFamily: "var(--font-favorite)" }}
         >
