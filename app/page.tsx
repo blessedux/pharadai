@@ -11,50 +11,56 @@ import GeminiEffectWrapper from "@/components/gemini-effect-wrapper"
 
 export default function Home() {
   return (
-    <>
-      <main className="flex min-h-screen flex-col items-center justify-between relative z-10" style={{ marginBottom: "calc(16rem - 100px)" }}>
-        {/* Hero section */}
+    <main className="flex min-h-screen flex-col items-center justify-between bg-black text-white overflow-hidden">
+      {/* Hero Section */}
+      <section className="w-full min-h-screen flex flex-col items-center justify-center relative bg-black">
         <div className="relative w-full">
           <ScrollSections />
         </div>
-        
-        {/* Logo carousel and services section in a single container */}
-        <div className="w-full relative">
-          {/* Logo carousel */}
-          <div className="w-full" style={{ 
-            height: "30vh", 
-            position: "relative",
-            zIndex: 20,
-            backgroundColor: "#020617"
-          }}>
-            <PartnerLogoCarousel />
-          </div>
-          
-          {/* Services section positioned directly after logo carousel */}
-          <div className="w-full" style={{ 
-            position: "relative",
-            zIndex: 10,
-            backgroundColor: "#020617"
-          }}>
-            <ServicesSection />
-          </div>
-          
-          {/* Other sections */}
-          <div className="w-full relative">
-            <ProcessSection />
-            <TeamSection />
-            <ProjectSection />
-            <GeminiEffectWrapper />
-            
-            {/* Spacer to ensure footer is revealed gradually as you scroll */}
-            <div className="h-[300px] bg-transparent"></div>
-          </div>
+      </section>
+
+      {/* Logo Carousel Section */}
+      <section className="w-full bg-black relative z-10">
+        <div className="w-full" style={{ height: "30vh" }}>
+          <PartnerLogoCarousel />
         </div>
-      </main>
-      
-      {/* Footer is now fixed at bottom with z-index of 0 */}
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="w-full bg-[#020617] relative z-10">
+        <ServicesSection />
+      </section>
+
+      {/* Process Section */}
+      <section id="process" className="w-full relative z-10" style={{
+        background: "linear-gradient(to bottom, #020617, #0f172a)"
+      }}>
+        <ProcessSection />
+      </section>
+
+      {/* Project Section */}
+      <section id="projects" className="w-full relative z-10" style={{
+        background: "linear-gradient(to bottom, #0f172a, #1e293b)"
+      }}>
+        <ProjectSection />
+      </section>
+
+      {/* Team Section */}
+      <section id="team" className="w-full relative z-10" style={{
+        background: "linear-gradient(to bottom, #1e293b, #334155)",
+        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, #1e293b, #334155)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
+        <TeamSection />
+      </section>
+
+      {/* Gemini Effect Section */}
+      <GeminiEffectWrapper />
+
+      {/* Footer with Parallax Reveal */}
       <Footer />
-    </>
+    </main>
   )
 }
 

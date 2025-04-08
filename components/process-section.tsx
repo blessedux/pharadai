@@ -64,15 +64,7 @@ export default function ProcessSection() {
   }, [])
 
   return (
-    <section 
-      className="w-full py-24 pb-32 relative z-10"
-      id="process"
-      ref={sectionRef}
-      style={{ 
-        background: 'linear-gradient(to bottom, #1e293b, #334155)',
-        backgroundImage: 'linear-gradient(to bottom, rgb(30 41 59), rgb(51 65 85))'
-      }}
-    >
+    <div className="w-full py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16" ref={titleRef}>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">Nuestro Proceso</h2>
@@ -159,6 +151,6 @@ export default function ProcessSection() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 } 

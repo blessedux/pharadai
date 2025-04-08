@@ -1,51 +1,63 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 export default function Footer() {
+  const footerRef = useRef<HTMLElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    // Function to handle scroll and determine footer visibility
-    const handleScroll = () => {
-      // Calculate how far down the page the user has scrolled
-      const scrollPosition = window.scrollY
-      const windowHeight = window.innerHeight
-      const documentHeight = document.documentElement.scrollHeight
-
-      // Start showing the footer when user is close to the end of the page
-      // Adjust the threshold based on your needs
-      const threshold = documentHeight - windowHeight - 300
-      
-      if (scrollPosition > threshold) {
-        setIsVisible(true)
-      } else {
-        setIsVisible(false)
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger)
+    
+    // Create a timeline for the footer reveal animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top bottom-=100", // Start when the footer is 100px from the bottom of the viewport
+        end: "bottom bottom", // End when the bottom of the footer reaches the bottom of the viewport
+        scrub: 1.5, // Smooth scrubbing effect with a slight delay
+        onUpdate: (self) => {
+          // Update visibility state based on scroll progress
+          setIsVisible(self.progress > 0.1)
+        }
       }
-    }
-
-    // Add scroll event listener
-    window.addEventListener('scroll', handleScroll)
+    })
     
-    // Initial check
-    handleScroll()
+    // Add parallax effect to the content
+    tl.to(contentRef.current, {
+      y: -50, // Move content up slightly for parallax effect
+      ease: "none"
+    })
     
-    // Clean up the event listener
+    // Add a subtle scale effect to the background title
+    tl.to(".footer-bg-title", {
+      scale: 1.05,
+      opacity: 0.3,
+      ease: "none"
+    }, "<")
+    
     return () => {
-      window.removeEventListener('scroll', handleScroll)
+      // Clean up by killing the ScrollTrigger
+      if (tl.scrollTrigger) {
+        tl.scrollTrigger.kill()
+      }
     }
   }, [])
 
   return (
     <footer 
+      ref={footerRef}
       id="contact" 
-      className={`w-full py-12 bg-slate-900 fixed bottom-0 left-0 z-[5] overflow-hidden min-h-[16rem] transition-transform duration-500 ease-out ${!isVisible ? 'translate-y-[90%]' : 'translate-y-0'}`}
-      style={{ 
-        transform: isVisible ? 'translateY(0)' : 'translateY(90%)',
-        willChange: 'transform',
-      }}
+      className={`w-full py-12 bg-slate-900 relative z-[5] overflow-hidden min-h-[16rem] transition-opacity duration-500 ease-out ${!isVisible ? 'opacity-0' : 'opacity-100'}`}
     >
-      <div className="container mx-auto px-4">
+      <div 
+        ref={contentRef}
+        className="container mx-auto px-4 relative z-10"
+      >
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
             <h2 className="text-2xl font-bold text-white mb-2">PHARAD.AI</h2>
@@ -83,10 +95,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Large background title */}
-      <div className="absolute -bottom-10 left-0 right-0 flex justify-center transform translate-y-0 overflow-hidden">
+      {/* Large background title with parallax effect */}
+      <div className="absolute -bottom-10 left-0 right-0 flex justify-center transform overflow-hidden">
         <h2 
-          className="text-[12rem] md:text-[16rem] font-extrabold text-gray-500/25 tracking-[0.3em] font-favorite whitespace-nowrap"
+          className="footer-bg-title text-[12rem] md:text-[16rem] font-extrabold text-gray-500/25 tracking-[0.3em] font-favorite whitespace-nowrap"
           style={{ fontFamily: "var(--font-favorite)" }}
         >
           PHARAD.AI

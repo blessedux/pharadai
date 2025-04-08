@@ -167,15 +167,7 @@ export default function ProjectSection() {
   ]
 
   return (
-    <section 
-      id="projects" 
-      className="w-full py-24 pb-24 relative z-10"
-      ref={sectionRef}
-      style={{ 
-        background: 'linear-gradient(to bottom, #0f172a, #020617)',
-        backgroundImage: 'linear-gradient(to bottom, rgb(15 23 42), rgb(2 6 23))',
-      }}
-    >
+    <div className="w-full py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -196,6 +188,6 @@ export default function ProjectSection() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 } 

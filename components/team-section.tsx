@@ -45,17 +45,7 @@ export default function TeamSection() {
   }, [])
 
   return (
-    <section 
-      className="w-full py-24 pb-32 relative z-10"
-      id="team"
-      ref={sectionRef}
-      style={{ 
-        background: "linear-gradient(to bottom, rgb(51 65 85), rgb(15 23 42))",
-        backgroundImage: "url('/patterns/grid.svg'), linear-gradient(to bottom, rgb(51 65 85), rgb(15 23 42))",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className="w-full py-20">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
@@ -137,6 +127,6 @@ export default function TeamSection() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   )
 } 
